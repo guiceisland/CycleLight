@@ -1,0 +1,106 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+  
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  body {
+    @apply bg-slate-950 text-slate-100 font-display min-h-screen;
+    background-image: 
+      radial-gradient(ellipse at 20% 0%, rgba(0, 204, 68, 0.08) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 100%, rgba(0, 102, 34, 0.06) 0%, transparent 50%);
+  }
+  
+  input[type="range"] {
+    @apply appearance-none bg-transparent cursor-pointer;
+  }
+  
+  input[type="range"]::-webkit-slider-runnable-track {
+    @apply h-2 rounded-full;
+    background: linear-gradient(to right, #006622, #00cc44, #00ff55);
+  }
+  
+  input[type="range"]::-webkit-slider-thumb {
+    @apply appearance-none w-5 h-5 rounded-full bg-white shadow-lg -mt-1.5;
+    box-shadow: 0 0 0 3px rgba(0, 204, 68, 0.3), 0 2px 8px rgba(0, 0, 0, 0.3);
+  }
+  
+  input[type="range"]::-moz-range-track {
+    @apply h-2 rounded-full;
+    background: linear-gradient(to right, #006622, #00cc44, #00ff55);
+  }
+  
+  input[type="range"]::-moz-range-thumb {
+    @apply w-5 h-5 rounded-full bg-white border-0;
+    box-shadow: 0 0 0 3px rgba(0, 204, 68, 0.3), 0 2px 8px rgba(0, 0, 0, 0.3);
+  }
+}
+
+@layer components {
+  .input-field {
+    @apply w-full px-4 py-3 bg-slate-900/80 border border-slate-700/50 rounded-xl 
+           text-slate-100 placeholder-slate-500 font-mono text-sm
+           focus:outline-none focus:border-cash-500/50 focus:ring-2 focus:ring-cash-500/20
+           transition-all duration-200;
+  }
+  
+  .label-text {
+    @apply block text-xs font-medium text-slate-400 uppercase tracking-wider mb-2;
+  }
+  
+  .stat-card {
+    @apply bg-slate-900/60 backdrop-blur-sm border border-slate-800/50 rounded-2xl p-5;
+  }
+  
+  .day-cell {
+    @apply flex flex-col items-center justify-center rounded-lg text-xs font-mono
+           transition-all duration-200 cursor-default;
+    min-width: 2.25rem;
+    min-height: 3rem;
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    @apply bg-gradient-to-r from-cash-400 to-cash-300 bg-clip-text text-transparent;
+  }
+  
+  .glow-green {
+    box-shadow: 0 0 20px rgba(0, 204, 68, 0.3), 0 0 40px rgba(0, 204, 68, 0.1);
+  }
+}
+
+/* Custom animations for critical state */
+@keyframes pulse-critical {
+  0% { box-shadow: 0 0 0 0 rgba(248, 113, 113, 0.4); }
+  70% { box-shadow: 0 0 0 8px rgba(248, 113, 113, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(248, 113, 113, 0); }
+}
+
+.day-cell.bg-rose-500\/95 {
+  animation: pulse-critical 2s infinite;
+}
+
+/* Visual enhancements for today marker */
+.day-cell.scale-105 {
+  transform: scale(1.1);
+  z-index: 10;
+}
+
+/* Better spacing for day cells on mobile */
+@media (max-width: 480px) {
+  .day-cell {
+    width: 30px !important;
+    height: 42px !important;
+  }
+}
